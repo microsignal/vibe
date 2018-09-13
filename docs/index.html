@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>microvibe</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="keywords"
+	content="java,web,http,micro,microservice,js,javascript,node,nodejs,ui,docs,documentation,github,github-pages">
+<meta name="description"
+	content="Web接口平台开发框架, 采用微服务思想, 支持分布式运行方案, 支持前后端分离开发">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css"
+	title="vue">
+<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dark.css"
+	title="dark" disabled>
+<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css"
+	title="buble" disabled>
+<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/pure.css"
+	title="pure" disabled>
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
+	
+<style>
+a.demo-theme-preview:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+a.demo-search-clear:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+</style>
+</head>
+<body>
+	<div id="app">Loading ...</div>
+	<script>
+		window.$docsify = {
+			homepage: 'README.md',
+			coverpage: 'COVERPAGE.md',
+			loadSidebar : 'SUMMARY.md',
+			loadNavbar : 'NAVBAR.md',
+			//coverpage: true,
+			//loadSidebar : true,
+			//loadNavbar : true,
+			auto2top : true,
+			autoHeader : true,
+			executeScript : true,
+			mergeNavbar : true,
+			maxLevel : 5,
+			subMaxLevel : 4,
+			//别名
+			alias : {
+			//	'\\/en\\/(.+)' : '/$1',
+				'\\/en-us\\/(.+)' : '/$1',
+				'\\/zh\\/(.+)' : '/$1',
+				'\\/zh-cn\\/(.+)' : '/$1'
+			},
+			noCompileLinks : [ '/_private', '/private/.*' ],//不处理的链接
+			// 全文搜索
+			search : {
+				maxAge : 3600000, // 过期时间，单位毫秒，默认一天 86400000
+				paths : 'auto',
+				placeholder : 'Search',
+				// 支持本地化
+				placeholder : {
+					'/zh/' : '搜索',
+					'/en/' : 'Search',
+					'/' : 'Search'
+				},
+				noData : 'No Results!',
+				// 支持本地化
+				noData : {
+					'/zh/' : '找不到结果',
+					'/en/' : 'No Results',
+					'/' : 'No Results'
+				},
+				// 搜索标题的最大层级, 1 - 6
+				depth : 4
+			},
+			// mermaid
+			markdown : {
+				renderer : {
+					code : function(code, lang) {
+						if (lang === "mermaid") {
+							return ('<div class="mermaid">'
+									+ mermaid.render(lang, code) + "</div>");
+						} else if(lang === 'math'){
+							var arr = code.split('\n');
+							var content = '';
+							var newline = true;
+							for(var i=0;i<arr.length;i++){
+								var text = arr[i].trimRight();
+								var nextnewline = true;
+								if(text.endsWith('\\')){
+									text = text.replace(/\\+$/,'');
+									nextnewline = false;
+								}else{
+									nextnewline = true;
+								}
+								try{
+									var html = katex.renderToString(text);
+									if(newline && nextnewline){
+										content += '<div class="katex">'+html+'</div>';
+									}else{
+										content += '<span class="katex">'+html+'</span>';
+									}
+								}catch(e){
+									if(newline && nextnewline){
+										content += '<div class="katex">'+text+'</div>';
+									}else{
+										content += '<span class="katex">'+text+'</span>';
+									}
+									console.warn(e);
+								}
+								newline = nextnewline;
+							}
+							return content;
+						}
+						return this.origin.code.apply(this, arguments);
+					}
+				}
+			},
+			formatUpdated : '{YYYY}/{MM}/{DD} {HH}:{mm}',
+			plugins : [ function(hook, vm) {
+				hook.beforeEach(function(html) {
+						return html + '\n----\n' + 'Last modified {docsify-updated} '
+					})
+			}],
+			name : '',
+			repo : ''
+		};
+		(function(){
+			initMermaid();
+			bindThemeChangeEvent();
+			bindSearchClearEvent();
+		})();
+		function initMermaid(){
+			if(typeof(mermaid) == 'undefined'){
+				setTimeout(function(){
+					initMermaid();
+				},1000);
+				return false;
+			}
+			mermaid.initialize({
+				startOnLoad : false
+			});
+		}
+		function bindSearchClearEvent(){
+			if(typeof(Docsify) == 'undefined' || Docsify.dom.find('.demo-search-clear') == null){
+				setTimeout(function(){
+					bindSearchClearEvent();
+				},1000);
+				return false;
+			}
+			var searchClear = Docsify.dom.find('.demo-search-clear');
+			searchClear.onclick = function(e){
+				localStorage.removeItem('docsify.search.expires');
+				localStorage.removeItem('docsify.search.index');
+			}
+		}
+		function bindThemeChangeEvent(){
+			if(typeof(Docsify) == 'undefined' || Docsify.dom.findAll('.demo-theme-preview').length == 0){
+				setTimeout(function(){
+					bindThemeChangeEvent();
+				},1000);
+				return false;
+			}
+			var previews = Docsify.dom.findAll('.demo-theme-preview');
+			var themes = Docsify.dom.findAll('[rel="stylesheet"]');
+			previews.forEach(function(preview) {
+				preview.onclick = function(e) {
+					var title = e.target.getAttribute('data-theme')
+					themes.forEach(function(theme) {
+						theme.disabled = theme.title !== title
+					});
+				};
+			});
+		}
+	</script>
+	
+	<script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+	<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+	<script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
+	<script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+	<script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-xml.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-javascript.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-python.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-c.min.js"></script>
+
+<!-- 
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+    	//$表示行内元素，$$表示块状元素
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+</script>
+-->
+</body>
+</html>

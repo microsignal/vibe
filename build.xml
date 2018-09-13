@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." name="microvibe" default="build">
+	<!-- Maven-Ant-Tasks
+	依赖jar包下载后放到${ant.home}/lib目录中,会自动加入classpath
+	可通过maven配置依赖下载jar
+	<dependency>
+		<groupId>org.apache.maven</groupId>
+		<artifactId>maven-ant-tasks</artifactId>
+		<version>2.1.3</version>
+	</dependency>
+
+	task定义方式1
+	<taskdef resource="org/apache/maven/artifact/ant/antlib.xml" />
+
+	task定义方式2
+	<taskdef name="dependencies" classname="org.apache.maven.artifact.ant.DependenciesTask"/>
+	<taskdef name="install" classname="org.apache.maven.artifact.ant.InstallTask"/>
+	<taskdef name="deploy" classname="org.apache.maven.artifact.ant.DeployTask"/>
+	<taskdef name="install-provider" classname="org.apache.maven.artifact.ant.InstallWagonProviderTask"/>
+	<taskdef name="mvn" classname="org.apache.maven.artifact.ant.Mvn"/>
+	<taskdef name="writepom" classname="org.apache.maven.artifact.ant.WritePomTask"/>
+	<typedef name="localRepository" classname="org.apache.maven.artifact.ant.LocalRepository"/>
+	<typedef name="remoteRepository" classname="org.apache.maven.artifact.ant.RemoteRepository"/>
+	<typedef name="authentication" classname="org.apache.maven.artifact.ant.Authentication"/>
+	<typedef name="proxy" classname="org.apache.maven.artifact.ant.Proxy"/>
+	<taskdef name="pom" classname="org.apache.maven.artifact.ant.Pom"/>
+	-->
+
+	<!-- read env to property -->
+	<property environment="env" />
+
+	<!-- maven config -->
+	<path id="maven-ant-tasks.classpath" path="${ant.home}/lib/maven-ant-tasks-2.1.3.jar" />
+	<taskdef resource="org/apache/maven/artifact/ant/antlib.xml" classpathref="maven-ant-tasks.classpath" />
+	<pom id="maven-pom" file="pom.xml" />
+
+	<!-- groovy task -->
+	<path id="groovy-ant-tasks.classpath" path="${ant.home}/lib/groovy-all-2.4.13.jar" />
+	<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="groovy-ant-tasks.classpath"/>
+
+	<!-- maven dependencies -->
+	<dependencies pathId="ant.classpath.build" filesetid="mvn.fileset.dependencies">
+		<pom refid="maven-pom" />
+	</dependencies>
+	<dependencies pathId="ant.classpath.runtime" filesetid="mvn.fileset.dependencies.runtime" usescope="runtime">
+		<pom refid="maven-pom" />
+	</dependencies>
+	<property name="ant.classpath.build" refid="ant.classpath.build" />
+	<property name="ant.classpath.runtime" refid="ant.classpath.runtime" />
+	<property name="mvn.fileset.dependencies" refid="mvn.fileset.dependencies" />
+	<property name="mvn.fileset.dependencies.runtime" refid="mvn.fileset.dependencies.runtime" />
+
+	<!-- maven property -->
+	<property name="mvn.target" value="${maven-pom.build.directory}" />
+	<property name="mvn.finalName" value="${maven-pom.build.finalName}" />
+	<property name="mvn.sourceDir" value="${maven-pom.build.sourceDirectory}" />
+	<property name="mvn.resourceDir" value="${maven-pom.build.resources[0].directory}" />
+	<property name="mvn.outputDir" value="${maven-pom.build.outputDirectory}" />
+	<property name="mvn.testSourceDir" value="${maven-pom.build.testSourceDirectory}" />
+	<property name="mvn.testResourceDir" value="${maven-pom.build.testResources[0].directory}" />
+	<property name="mvn.testOutputDir" value="${maven-pom.build.testOutputDirectory}" />
+	<property name="mvn.scriptSourceDir" value="${maven-pom.build.scriptSourceDirectory}" />
+	<!-- 暂时无法从maven内置变量中获取配置,作为手动配置 -->
+	<condition property="maven-pom.properties.webapp.sourceDirectory" value="src/main/webapp">
+		<not>
+			<isset property="maven-pom.properties.webapp.sourceDirectory" />
+		</not>
+	</condition>
+	<property name="mvn.webappDir" value="${maven-pom.basedir}/${maven-pom.properties.webapp.sourceDirectory}" />
+	<condition property="maven-pom.properties.project.build.sourceEncoding" value="UTF-8">
+		<not>
+			<isset property="maven-pom.properties.project.build.sourceEncoding" />
+		</not>
+	</condition>
+	<property name="mvn.sourceEncoding" value="${maven-pom.properties.project.build.sourceEncoding}" />
+	<condition property="maven-pom.properties.package.mainClass" value="">
+		<not>
+			<isset property="maven-pom.properties.package.mainClass" />
+		</not>
+	</condition>
+	<property name="mvn.mainClass" value="${maven-pom.properties.package.mainClass}" />
+
+	<!-- ant property -->
+	<available property="ant.target.source.exists" file="${mvn.sourceDir}" />
+	<available property="ant.target.resource.exists" file="${mvn.resourceDir}" />
+	<available property="ant.target.webapp.exists" file="${mvn.webappDir}" />
+
+	<condition property="ant.mvn.command" value="${env.MAVEN_HOME}/bin/mvn.cmd" else="${env.MAVEN_HOME}/bin/mvn">
+		<os family="windows"></os>
+		<!--<os family="mac"></os>-->
+		<!--<os family="unix"></os>-->
+	</condition>
+	<!--<property name="ant.mvn.command" value="${env.MAVEN_HOME}/bin/mvn.cmd" />-->
+	<property name="ant.target" value="${maven-pom.build.directory}/ant" />
+	<property name="ant.target.classes" value="${ant.target}/classes" />
+	<property name="ant.target.lib" value="${ant.target}/lib" />
+	<property name="ant.target.flattenLib" value="${ant.target}/flatten-lib" />
+	<property name="ant.target.webRoot" value="${ant.target}/webRoot" />
+	<property name="ant.target.finalName" value="${ant.target}/${maven-pom.build.finalName}" />
+	<property name="ant.package.src.excludes" value="backup/**,target/**" />
+	<!-- version file -->
+	<property name="versionFile" value="version.properties" />
+	<tstamp>
+		<format property="DateSign" pattern="yyyyMMdd" />
+	</tstamp>
+
+	<!-- =================================================================== -->
+	<!--  Default target -->
+	<!-- =================================================================== -->
+	<target name="build" depends="compile">
+	</target>
+	<target name="clean">
+		<delete dir="${ant.target}" quiet="true" />
+	</target>
+	<target name="copyLibs">
+		<copy todir="${ant.target.lib}" flatten="false" overwrite="true">
+			<fileset refid="mvn.fileset.dependencies">
+			</fileset>
+		</copy>
+	</target>
+	<target name="copyFlattenLibs">
+		<copy todir="${ant.target.flattenLib}" flatten="true" overwrite="true">
+			<fileset refid="mvn.fileset.dependencies">
+			</fileset>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- maven operation -->
+	<!--
+			跳过测试，会使用参数-DskipTests和-Dmaven.test.skip=true，这两个参数的主要区别是：
+			-DskipTests，不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes下。
+			-Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类。
+	-->
+	<!-- =================================================================== -->
+	<target name="mvn.clean">
+		<exec command="${ant.mvn.command}">
+			<arg line="clean" />
+		</exec>
+	</target>
+	<target name="mvn.copyDependencies">
+		<exec command="${ant.mvn.command}">
+			<arg line="dependency:copy-dependencies" />
+		</exec>
+	</target>
+	<target name="mvn.compile">
+		<exec command="${ant.mvn.command}">
+			<arg line="compile" />
+		</exec>
+	</target>
+	<target name="mvn.test">
+		<exec command="${ant.mvn.command}">
+			<arg line="test" />
+		</exec>
+	</target>
+	<target name="mvn.package">
+		<exec command="${ant.mvn.command}">
+			<arg line="-DskipTests package" />
+		</exec>
+	</target>
+	<target name="mvn.assembly">
+		<exec command="${ant.mvn.command}">
+			<arg line="-DskipTests assembly:assembly" />
+		</exec>
+	</target>
+	<target name="mvn.site">
+		<exec command="${ant.mvn.command}">
+			<arg line="-Dmaven.test.skip=true site" />
+		</exec>
+	</target>
+	<target name="mvn.install">
+		<exec command="${ant.mvn.command}">
+			<arg line="-Dmaven.test.skip=true install" />
+		</exec>
+	</target>
+	<target name="mvn.info">
+		<echo message="ant.classpath.build = ${ant.classpath.build}" />
+		<echo message="mvn.fileset.dependencies = ${mvn.fileset.dependencies}" />
+		<echo message="mvn.target = ${mvn.target}" />
+		<echo message="mvn.finalName = ${mvn.finalName}" />
+		<echo message="mvn.sourceDir = ${mvn.sourceDir}" />
+		<echo message="mvn.resourceDir = ${mvn.resourceDir}" />
+		<echo message="mvn.outputDir = ${mvn.outputDir}" />
+		<echo message="mvn.testSourceDir = ${mvn.testSourceDir}" />
+		<echo message="mvn.testResourceDir = ${mvn.testResourceDir}" />
+		<echo message="mvn.testOutputDir = ${mvn.testOutputDir}" />
+		<echo message="mvn.scriptSourceDir = ${mvn.scriptSourceDir}" />
+		<echo message="mvn.webappDir = ${mvn.webappDir}" />
+		<echo message="mvn.target.jar = ${mvn.target}/${mvn.finalName}.jar" />
+		<echo message="mvn.webappDir = ${mvn.webappDir}" />
+		<echo message="mvn.sourceEncoding = ${mvn.sourceEncoding}" />
+		<echo message="mvn.mainClass = ${mvn.mainClass}" />
+		<echo message="maven-pom.properties.webapp.contextPath = ${maven-pom.properties.webapp.contextPath}" />
+	</target>
+	<!-- =================================================================== -->
+	<!-- Build and Pacakge -->
+	<!-- =================================================================== -->
+	<!-- Pacakge -->
+	<target name="package" depends="package.war,package.jar">
+	</target>
+	<target name="package.src" depends="init">
+		<delete file="${ant.target.finalName}-src.jar" quiet="true" />
+		<jar destfile="${ant.target.finalName}-src.jar" basedir="${basedir}" excludes="${ant.package.src.excludes}">
+			<manifest>
+				<section name="Package-Info">
+					<attribute name="Build-Date" value="${currBuildDate}" />
+					<attribute name="Build-Num" value="${currBuildNum}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+	<!-- Pacakge Jar  -->
+	<target name="package.jar" depends="compile" unless="ant.target.webapp.exists">
+		<delete file="${ant.target.finalName}.jar" quiet="true" />
+		<jar destfile="${ant.target.finalName}.jar" basedir="${ant.target.classes}">
+			<include name="**/*.*" />
+			<manifest>
+				<attribute name="Main-Class" value="${mvn.mainClass}"/>
+				<section name="Package-Info">
+					<attribute name="Build-Date" value="${currBuildDate}" />
+					<attribute name="Build-Num" value="${currBuildNum}" />
+				</section>
+			</manifest>
+		</jar>
+		<echo>Finish package: ${ant.target.finalName}.jar</echo>
+	</target>
+	<!-- Package War -->
+	<target name="package.war" depends="compile" if="ant.target.webapp.exists">
+		<delete file="${ant.target.finalName}.war" quiet="true" />
+		<delete dir="${ant.target.webRoot}" quiet="true" />
+		<mkdir dir="${ant.target.webRoot}" />
+		<mkdir dir="${ant.target.webRoot}/WEB-INF/lib" />
+		<mkdir dir="${ant.target.webRoot}/WEB-INF/classes" />
+		<copy todir="${ant.target.webRoot}/WEB-INF/classes" overwrite="true">
+			<fileset dir="${ant.target.classes}" includes="**/*.*">
+			</fileset>
+		</copy>
+		<copy todir="${ant.target.webRoot}/WEB-INF/lib" flatten="true" overwrite="true">
+			<fileset refid="mvn.fileset.dependencies">
+			</fileset>
+		</copy>
+		<copy todir="${ant.target.webRoot}" overwrite="true">
+			<fileset dir="${mvn.webappDir}" includes="**/*.*">
+			</fileset>
+		</copy>
+		<jar destfile="${ant.target.finalName}.war" basedir="${ant.target.webRoot}">
+			<include name="**/*.*" />
+			<manifest>
+				<section name="Package-Info">
+					<attribute name="Build-Date" value="${currBuildDate}" />
+					<attribute name="Build-Num" value="${currBuildNum}" />
+				</section>
+			</manifest>
+		</jar>
+		<echo>Finish package: ${ant.target.finalName}.war</echo>
+	</target>
+
+	<!-- Compile -->
+	<target name="compile" depends="init,compile.resource,compile.source,copyLibs,copyFlattenLibs">
+		<echo message="Finish compiling java code" />
+	</target>
+	<target name="compile.resource" if="ant.target.resource.exists">
+		<copy todir="${ant.target.classes}" overwrite="true">
+			<fileset dir="${mvn.resourceDir}">
+			</fileset>
+		</copy>
+	</target>
+	<target name="compile.source" if="ant.target.source.exists">
+		<javac srcdir="${mvn.sourceDir}" destdir="${ant.target.classes}" classpathref="ant.classpath.build" encoding="${mvn.sourceEncoding}" debug="true" includeantruntime="true" />
+		<copy todir="${ant.target.classes}" overwrite="true">
+			<fileset dir="${mvn.sourceDir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<!-- Initialize, Clean and Checkout Code -->
+	<target name="init" depends="version">
+		<mkdir dir="${ant.target}" />
+		<delete dir="${ant.target.classes}" quiet="true" />
+		<mkdir dir="${ant.target.classes}" />
+		<echo message="Finish initializing" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Version Management -->
+	<!-- =================================================================== -->
+
+	<!-- Generate Version -->
+	<target name="version" depends="alterVersion,useVersion">
+		<echo>Current Build Date: ${currBuildDate}</echo>
+		<echo>Current Build No.: ${currBuildNum}</echo>
+	</target>
+
+	<!-- Update and Use Build Date, Increase Build No. by 1, Update Version File -->
+	<target name="alterVersion" if="isNewDate" depends="judgeVersionDate">
+		<delete file="${versionFile}" quiet="true" />
+		<propertyfile file="${versionFile}">
+			<entry key="buildTime" type="date" value="now" pattern="yyyy-MM-dd HH''mm''ss" />
+			<entry key="buildDate" type="date" value="now" pattern="yyyyMMdd" />
+			<entry key="buildNum" type="int" value="1" />
+		</propertyfile>
+		<property name="currBuildDate" value="${DateSign}" />
+		<property name="currBuildNum" value="1" />
+	</target>
+
+	<!-- Use Build Date, Increase Build No. by 1, Update Version File -->
+	<target name="useVersion" unless="isNewDate" depends="judgeVersionDate">
+		<propertyfile file="${versionFile}">
+			<entry key="buildTime" type="date" value="now" pattern="yyyy-MM-dd HH''mm''ss" />
+		</propertyfile>
+		<property name="currBuildDate" value="${buildDate}" />
+		<property name="currBuildNum" value="${buildNum}" />
+	</target>
+
+	<!-- Judge Version Date -->
+	<target name="judgeVersionDate" depends="readVersionFile">
+		<condition property="isNewDate" value="true">
+			<not>
+				<and>
+					<isset property="existsVersionFile" />
+					<equals arg1="${DateSign}" arg2="${buildDate}" />
+				</and>
+			</not>
+		</condition>
+	</target>
+
+	<!-- Read Version File -->
+	<target name="readVersionFile" if="existsVersionFile" depends="judgeVersionFile">
+		<propertyfile file="${versionFile}">
+			<entry key="buildTime" type="date" value="now" pattern="yyyy-MM-dd HH''mm''ss" />
+			<entry key="buildNum" default="0" type="int" operation="+" value="1" />
+		</propertyfile>
+		<property file="${versionFile}" />
+	</target>
+
+	<!-- Judge Version File -->
+	<target name="judgeVersionFile">
+		<condition property="existsVersionFile" value="true">
+			<available file="${versionFile}">
+			</available>
+		</condition>
+	</target>
+</project>

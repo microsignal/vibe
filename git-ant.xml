@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." name="phoenix" default="build">
+
+	<!-- <property name="git.executable" value="git" /> -->
+	<!-- <property name="git.executable" value="C:\Program Files\Git\cmd\git.exe" /> -->
+	<condition property="git.executable" value="C:\Program Files\Git\cmd\git.exe" else="git">
+		<os family="windows"></os>
+		<!--<os family="mac"></os>-->
+		<!--<os family="unix"></os>-->
+	</condition>
+	<tstamp>
+		<format property="time.sign" pattern="yyyy/MM/dd HH:mm:ss" />
+	</tstamp>
+	<tstamp>
+		<format property="date.sign" pattern="yyyyMMdd" />
+	</tstamp>
+
+	<!-- =================================================================== -->
+	<!--  git taskdef -->
+	<!-- =================================================================== -->
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="options" default="" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="failerror" default="false" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git dir @{dir}" />
+			<echo message="git @{command}" />
+			<exec executable="${git.executable}" dir="@{dir}" failonerror="@{failerror}">
+				<arg line="@{command} @{options}" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	<!-- =================================================================== -->
+	<!--  git add to index -->
+	<!-- =================================================================== -->
+	<macrodef name="git-add">
+		<attribute name="file" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="options" default="" />
+		<attribute name="failerror" default="false" />
+		<sequential>
+			<git command="add" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+				<args>
+					<arg value="@{file}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	<!-- =================================================================== -->
+	<!--  git commit  -->
+	<!-- =================================================================== -->
+	<macrodef name="git-commit">
+		<attribute name="message" default="commit automatically by ant, at ${time.sign}" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="options" default="" />
+		<attribute name="failerror" default="false" />
+		<sequential>
+			<git command="commit" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+				<args>
+					<arg value="-m @{message}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	<!-- =================================================================== -->
+	<!--  git push  -->
+	<!-- =================================================================== -->
+	<macrodef name="git-push">
+		<attribute name="remote" default="origin" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="options" default="" />
+		<attribute name="localref" />
+		<attribute name="remoteref" />
+		<attribute name="failerror" default="false" />
+		<sequential>
+			<git command="push" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+				<args>
+					<arg value="@{remote}" />
+					<arg value="@{localref}:@{remoteref}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	<target name="git.commit.all">
+		<echo message="commit at ${time.sign}" />
+		<!--
+		<git-add file="*" dir="${basedir}/submodule" />
+		-->
+		<git-add file="*" dir="${basedir}" />
+		<!--
+		<git-commit dir="${basedir}/submodule" />
+		-->
+		<git-commit dir="${basedir}" />
+	</target>
+	<target name="git.push.all" depends="git.commit.all">
+		<!--
+		<git-push remote="origin" localref="master" remoteref="master" dir="${basedir}/submodule" />
+		-->
+		<git-push remote="origin" localref="master" remoteref="master" dir="${basedir}" />
+		<git-push remote="gitee" localref="master" remoteref="master" dir="${basedir}" />
+		<git-push remote="github" localref="master" remoteref="master" dir="${basedir}" />
+		<!--
+		<git-push remote="coding" localref="master" remoteref="master" />
+		<git-push remote="csdn" localref="master" remoteref="master" />
+		-->
+	</target>
+	<target name="build" depends="git.push.all">
+		<echo message="finished at ${time.sign}!" />
+	</target>
+</project>
