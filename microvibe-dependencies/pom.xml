@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.microvibe</groupId>
+		<artifactId>microvibe</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<groupId>io.github.microvibe.dependencies</groupId>
+	<artifactId>microvibe-dependencies</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>microvibe-dependencies-test</module>
+		<module>microvibe-dependencies-logging</module>
+		<!--
+		<module>microvibe-dependencies-commons</module>
+		<module>microvibe-dependencies-validator</module>
+		<module>microvibe-dependencies-database-mysql</module>
+		<module>microvibe-dependencies-jarslink</module>
+		<module>microvibe-dependencies-jcaptcha</module>
+		<module>microvibe-dependencies-mybatis</module>
+		<module>microvibe-dependencies-quartz</module>
+		<module>microvibe-dependencies-serial</module>
+		<module>microvibe-dependencies-shiro</module>
+		<module>microvibe-dependencies-swagger</module>
+		<module>microvibe-dependencies-drools</module>
+		-->
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>example</id>
+			<modules>
+				<module>microvibe-dependencies-test</module>
+				<module>microvibe-dependencies-logging</module>
+				<module>microvibe-dependencies-commons</module>
+				<module>microvibe-dependencies-validator</module>
+				<module>microvibe-dependencies-database-mysql</module>
+				<module>microvibe-dependencies-jarslink</module>
+				<module>microvibe-dependencies-jcaptcha</module>
+				<module>microvibe-dependencies-mybatis</module>
+				<module>microvibe-dependencies-quartz</module>
+				<module>microvibe-dependencies-serial</module>
+				<module>microvibe-dependencies-shiro</module>
+				<module>microvibe-dependencies-swagger</module>
+				<module>microvibe-dependencies-drools</module>
+				<module>microvibe-dependencies-barcode</module>
+				<module>microvibe-dependencies-build</module>
+				<module>microvibe-dependencies-codeparser</module>
+				<module>microvibe-dependencies-cxf</module>
+				<module>microvibe-dependencies-javaee</module>
+				<module>microvibe-dependencies-jci</module>
+				<module>microvibe-dependencies-job</module>
+				<module>microvibe-dependencies-json</module>
+				<module>microvibe-dependencies-lucene</module>
+				<module>microvibe-dependencies-message</module>
+				<module>microvibe-dependencies-orm</module>
+				<module>microvibe-dependencies-poi</module>
+				<module>microvibe-dependencies-redisson</module>
+				<module>microvibe-dependencies-solr</module>
+				<module>microvibe-dependencies-solrj</module>
+				<module>microvibe-dependencies-template</module>
+				<module>microvibe-dependencies-tika</module>
+				<module>microvibe-dependencies-xml</module>
+				<module>microvibe-dependencies-jetty</module>
+
+			</modules>
+		</profile>
+	</profiles>
+
+	<properties>
+		<version.slf4j>1.7.21</version.slf4j>
+		<version.logback>1.1.7</version.logback>
+		<version.poi>3.15</version.poi>
+		<redisson.version>3.5.6</redisson.version>
+		<version.jetty>9.2.23.v20171218</version.jetty>
+	</properties>
+
+	<build>
+		<!--<finalName>${project.artifactId}</finalName>-->
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- =================================================================== -->
+			<!-- region [SubModules]-->
+			<dependency>
+				<groupId>io.github.microvibe.dependencies</groupId>
+				<artifactId>microvibe-dependencies-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.dependencies</groupId>
+				<artifactId>microvibe-dependencies-validator</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.dependencies</groupId>
+				<artifactId>microvibe-dependencies-commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.dependencies</groupId>
+				<artifactId>microvibe-dependencies-database-mysql</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- endregion -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: Barcode Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>javase</artifactId>
+				<version>2.0</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Barcode Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Build Tools Dependencies -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-ant-tasks</artifactId>
+				<version>2.1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.9.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant-launcher</artifactId>
+				<version>1.9.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-all</artifactId>
+				<version>2.3.7</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Build Tools Dependencies -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: Bytecode Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.ow2.asm</groupId>
+				<artifactId>asm-all</artifactId>
+				<version>5.2</version>
+			</dependency>
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm-all</artifactId>
+				<version>3.3.1</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Bytecode Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Parser Generators -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4</artifactId>
+				<version>4.5.3</version>
+			</dependency>
+			<dependency>
+				<groupId>antlr</groupId>
+				<artifactId>antlr</artifactId>
+				<version>2.7.7</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>3.2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>3.2.5</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Parser Generators -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Aspect Oriented -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>aopalliance</groupId>
+				<artifactId>aopalliance</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.8.13</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Aspect Oriented -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: okhttp Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>3.9.1</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: okhttp Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: jodd Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.jodd</groupId>
+				<artifactId>jodd-mail</artifactId>
+				<version>3.8.6</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: okhttp Libraries -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: Java Compilers/Parsers -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jci-core</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jci-eclipse</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jci-fam</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jci-javac</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jci-examples</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jdt.core.compiler</groupId>
+				<artifactId>ecj</artifactId>
+				<!--<version>4.5.1</version>-->
+				<version>4.6.1</version>
+			</dependency>
+			<!-- <dependency>
+				<groupId>org.eclipse.jdt</groupId>
+				<artifactId>core</artifactId>
+				<version>3.4.2.v_883_R34x</version>
+			</dependency>
+			<dependency>
+					<groupId>org.eclipse.core</groupId>
+					<artifactId>org.eclipse.core.resources</artifactId>
+					<version>3.9.1.v20140825-1431</version>
+			</dependency> -->
+			<dependency>
+				<groupId>com.thoughtworks.qdox</groupId>
+				<artifactId>qdox</artifactId>
+				<version>2.0-M3</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Java Compilers/Parsers -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Job Scheduling -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>2.2.1</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Job Scheduling -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: JSON Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.8.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.8.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>2.8.3</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: JSON Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Logging Frameworks -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-jdk14</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-access</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-examples</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Logging Frameworks -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Message Brokers -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>5.7.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-all</artifactId>
+				<version>5.11.1</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Message Brokers -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: POI Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-scratchpad</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-examples</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-excelant</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: POI Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: redisson Libraries -->
+			<!-- =================================================================== -->
+			<!-- [region: redisson](https://github.com/redisson/redisson) -->
+			<!-- JDK 1.8+ compatible -->
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>${redisson.version}</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: redisson Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Template Engines -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>2.3.23</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Template Engines -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: XPath Libraries -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.6</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: XPath Libraries -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: XML Processing -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.4.9</version>
+			</dependency>
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>2.0.2</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>2.11.0</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlbeans</groupId>
+				<artifactId>xmlbeans</artifactId>
+				<version>2.6.0</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ws.xmlschema</groupId>
+				<artifactId>xmlschema-core</artifactId>
+				<version>2.2.1</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.santuario</groupId>
+				<artifactId>xmlsec</artifactId>
+				<version>2.0.7</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+				<optional>true</optional>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: XML Processing -->
+			<!-- =================================================================== -->
+
+
+			<!-- =================================================================== -->
+			<!-- region: Javaee -->
+			<!-- =================================================================== -->
+			<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>2.2.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api -->
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+				<version>1.2.1</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- [javax/javaee-api] https://mvnrepository.com/artifact/javax/javaee-api -->
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>7.0</version>
+				<!-- <version>6.0</version> -->
+				<scope>provided</scope>
+			</dependency>
+			<!-- [javax/javaee-web-api] https://mvnrepository.com/artifact/javax/javaee-web-api -->
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-web-api</artifactId>
+				<version>7.0</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- [javax/javaee-ap] https://mvnrepository.com/artifact/javax/javaee-api -->
+			<!-- https://mvnrepository.com/artifact/javaee/javaee-api -->
+			<dependency>
+				<groupId>javaee</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>5</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- [old] https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>jstl-api</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- [old] https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- [old] https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- [old] https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Javaee -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Apache Cxf -->
+			<!-- =================================================================== -->
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-api</artifactId>
+				<version>2.7.15</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-ws-policy</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-databinding-jaxb</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-simple</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-bindings-soap</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-ws-security</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-core</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-core</artifactId>
+				<version>2.7.15</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http-jetty</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http</artifactId>
+				<version>3.0.4</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Apache Cxf -->
+			<!-- =================================================================== -->
+
+			<!-- =================================================================== -->
+			<!-- region: Jetty Server -->
+			<!-- =================================================================== -->
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-server</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-util</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-servlet</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-webapp -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-webapp</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-continuation</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-jsp</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jndi -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-jndi</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-security -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-security</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlets -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-servlets</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty.websocket/websocket-server -->
+			<dependency>
+				<groupId>org.eclipse.jetty.websocket</groupId>
+				<artifactId>websocket-server</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-proxy -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-proxy</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-client -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-client</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-deploy -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-deploy</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-annotations -->
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-annotations</artifactId>
+				<version>${version.jetty}</version>
+			</dependency>
+			<!-- =================================================================== -->
+			<!-- endregion: Jetty Server -->
+			<!-- =================================================================== -->
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>

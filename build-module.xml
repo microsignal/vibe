@@ -11,13 +11,6 @@
 	<groupId>io.github.microvibe</groupId>
 	<artifactId>submodule</artifactId>
 	<packaging>jar</packaging>
-	<name>microvibe</name>
-	<url>https://microvibe.github.io</url>
-	<description>microvibe</description>
-	<organization>
-		<name>https://microvibe.github.io</name>
-		<url>https://microvibe.github.io</url>
-	</organization>
 
 	<properties>
 		<maven.test.skip>false</maven.test.skip>
@@ -43,10 +36,8 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<dependencies>
-
-
-
 		<!-- =================================================================== -->
 		<!-- Begin: scope:test -->
 		<!-- =================================================================== -->
@@ -60,21 +51,4 @@
 		<!-- =================================================================== -->
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<maven.test.skip>true</maven.test.skip>
-			</properties>
-		</profile>
-		<profile>
-			<id>sut</id>
-			<properties>
-				<maven.test.skip>false</maven.test.skip>
-			</properties>
-		</profile>
-	</profiles>
 </project>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.microvibe.dependencies</groupId>
+		<artifactId>microvibe-dependencies</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<artifactId>microvibe-dependencies-tika</artifactId>
+	<packaging>jar</packaging>
+
+
+	<properties>
+		<tika.version>1.16</tika.version>
+	</properties>
+
+	<dependencies>
+		<!-- [Begin: commons-tika] -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika -->
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-serialization</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-serialization</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-app</artifactId>
+			<version>${tika.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-bundle</artifactId>
+			<version>${tika.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<!-- [End: commons-tika] -->
+
+	</dependencies>
+</project>

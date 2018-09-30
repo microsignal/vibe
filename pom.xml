@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.microvibe</groupId>
 	<artifactId>microvibe</artifactId>
-	<packaging>pom</packaging>
 	<version>1.1.1</version>
+	<packaging>pom</packaging>
+
 	<name>microvibe</name>
 	<url>https://microvibe.github.io</url>
 	<description>microvibe</description>
@@ -17,8 +18,8 @@
 	</organization>
 
 	<modules>
-		<!--
 		<module>microvibe-dependencies</module>
+		<!--
 		<module>microvibe-toolkit</module>
 		<module>microvibe-util</module>
 		<module>microvibe-dbv</module>
@@ -100,14 +101,15 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.16.20</version>
+				<version>1.18.2</version>
+				<!--<version>1.16.20</version>-->
 				<scope>provided</scope>
 				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.groovy</groupId>
 				<artifactId>groovy-all</artifactId>
-				<version>2.4.13</version>
+				<version>2.4.15</version>
 			</dependency>
 			<!-- [End: lombok+groovy] -->
 
@@ -147,7 +149,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<!--<finalName>${project.artifactId}</finalName>-->
-		<!-- =====[resources]===== -->
+		<!-- region =====[resources]===== -->
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -192,7 +194,8 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!-- =====[testResources]===== -->
+		<!-- endregion -->
+		<!-- region =====[testResources]===== -->
 		<testResources>
 			<testResource>
 				<directory>src/test/java</directory>
@@ -239,9 +242,42 @@
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
-		<!-- =====[pluginManagement]===== -->
+		<!-- endregion -->
+		<!-- region =====[pluginManagement]===== -->
 		<pluginManagement>
 			<plugins>
+				<!-- region [spring-boot] -->
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${springboot.version}</version>
+					<configuration>
+						<fork>true</fork>
+						<classifier>boot</classifier>
+						<mainClass>${package.mainClass}</mainClass>
+					</configuration>
+					<!--
+					<executions>
+						<execution>
+							<id>springboot-package</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+					 -->
+				</plugin>
+				<!-- endregion -->
+
+				<!-- region [maven-tools] -->
+
+				<!-- =====[maven-wrapper]===== -->
+				<plugin>
+					<groupId>com.rimerosolutions.maven.plugins</groupId>
+					<artifactId>wrapper-maven-plugin</artifactId>
+					<version>0.0.5</version>
+				</plugin>
+
 				<!-- =====[eclipse-lifecycle]===== -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -261,7 +297,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -274,7 +310,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -287,7 +323,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -299,7 +335,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
-					<version>2.8</version>
+					<version>2.10</version>
 					<configuration>
 						<addGroupIdToProjectName>true</addGroupIdToProjectName>
 						<downloadSources>true</downloadSources>
@@ -353,51 +389,15 @@
 					</configuration>
 				</plugin>
 
+				<!-- endregion -->
+
+				<!-- region [maven-lifecycle] -->
+
 				<!-- =====[clean]===== -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.5</version>
-				</plugin>
-
-				<!-- =====[source]===== -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2.1</version>
-					<configuration>
-						<attach>true</attach>
-					</configuration>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<phase>package</phase>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-							<configuration>
-								<excludes>
-									<exclude>rebel.xml</exclude>
-									<exclude>.gitkeep*</exclude>
-								</excludes>
-							</configuration>
-						</execution>
-						<!--
-						<execution>
-							<id>test-source</id>
-							<phase>package</phase>
-							<goals>
-								<goal>test-jar-no-fork</goal>
-							</goals>
-							<configuration>
-								<excludes>
-									<exclude>rebel.xml</exclude>
-									<exclude>.gitkeep*</exclude>
-								</excludes>
-							</configuration>
-						</execution>
-						 -->
-					</executions>
 				</plugin>
 
 				<!-- =====[build-helper]===== -->
@@ -435,7 +435,6 @@
 					</executions>
 				</plugin>
 
-
 				<!-- =====[compiler]===== -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -466,7 +465,8 @@
 						<dependency>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.16.18</version>
+							<version>1.18.2</version>
+							<!--<version>1.16.18</version>-->
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -475,7 +475,8 @@
 				<plugin>
 					<groupId>org.projectlombok</groupId>
 					<artifactId>lombok-maven-plugin</artifactId>
-					<version>1.16.18.1</version>
+					<version>1.18.0.0</version>
+					<!--<version>1.16.18.1</version>-->
 					<configuration>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
@@ -486,6 +487,77 @@
 								<goal>delombok</goal>
 							</goals>
 						</execution>
+					</executions>
+				</plugin>
+
+				<!-- =====[resources]===== -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.1.0</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<overwrite>true</overwrite>
+								<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src/main/resources-${spring.activeProfile}</directory>
+									</resource>
+								</resources>
+							</configuration>
+							<inherited>true</inherited>
+						</execution>
+					</executions>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<overwrite>true</overwrite>
+					</configuration>
+				</plugin>
+
+				<!-- =====[source]===== -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+					<configuration>
+						<attach>true</attach>
+						<!--<excludes>**/*</excludes>-->
+					</configuration>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+							<configuration>
+								<excludes>
+									<exclude>rebel.xml</exclude>
+									<exclude>.gitkeep*</exclude>
+								</excludes>
+							</configuration>
+						</execution>
+						<!--
+						<execution>
+							<id>test-source</id>
+							<phase>package</phase>
+							<goals>
+								<goal>test-jar-no-fork</goal>
+							</goals>
+							<configuration>
+								<excludes>
+									<exclude>rebel.xml</exclude>
+									<exclude>.gitkeep*</exclude>
+								</excludes>
+							</configuration>
+						</execution>
+						 -->
 					</executions>
 				</plugin>
 
@@ -533,7 +605,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.6</version>
+					<version>2.10</version>
 					<configuration>
 						<outputDirectory>${project.build.directory}/${package.dependencyDirectory}</outputDirectory>
 						<overWriteReleases>false</overWriteReleases>
@@ -583,6 +655,7 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<!-- =====[gpg]===== -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -601,20 +674,22 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.5.2</version>
 				</plugin>
 
 				<!-- =====[war]===== -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.3</version>
+					<version>3.2.0</version>
 					<configuration>
-						<warName>${project.artifactId}</warName>
+						<!--<warName>${project.artifactId}</warName>-->
+						<warName>${project.build.finalName}</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-						<excludes>
-							<exclude>rebel.xml</exclude>
-						</excludes>
+						<packagingExcludes>
+							**/rebel.xml,
+							**/.gitkeep
+						</packagingExcludes>
 					</configuration>
 				</plugin>
 
@@ -622,7 +697,8 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.4</version>
+					<version>3.1.0</version>
+					<!--<version>2.4</version>-->
 					<configuration>
 						<archive>
 							<manifest>
@@ -687,7 +763,7 @@
 							<configuration>
 								<rules>
 									<requireJavaVersion>
-										<version>${java.version}</version>
+										<version>${maven.compiler.source}</version>
 									</requireJavaVersion>
 								</rules>
 							</configuration>
@@ -699,15 +775,15 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.13</version>
+					<version>2.20</version>
 					<configuration>
-						<argLine>-Xmx256M</argLine>
+						<!--<argLine>-Xmx512M</argLine>-->
 						<includes>
 							<include>**/Test*.java</include>
 							<include>**/*Test.java</include>
 							<include>**/*TestCase.java</include>
 						</includes>
-						<!-- <skipTests>true</skipTests> -->
+						<!--<skipTests>false</skipTests>-->
 					</configuration>
 				</plugin>
 
@@ -730,15 +806,20 @@
 					</executions>
 				</plugin>
 
+				<!-- endregion -->
+
+				<!-- region [maven-jrebel] -->
+
 				<!-- =====[jrebel]===== -->
 				<plugin>
 					<groupId>org.zeroturnaround</groupId>
 					<artifactId>jrebel-maven-plugin</artifactId>
-					<version>${jrebel.maven.version}</version>
+					<version>1.1.8</version>
 					<configuration>
 						<addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
 						<alwaysGenerate>true</alwaysGenerate>
-						<showGenerated>false</showGenerated>
+						<showGenerated>true</showGenerated>
+						<rebelXmlDirectory>${project.build.outputDirectory}</rebelXmlDirectory>
 					</configuration>
 					<executions>
 						<execution>
@@ -758,25 +839,9 @@
 					</executions>
 				</plugin>
 
-				<!-- =====[spring-boot]===== -->
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${springboot.version}</version>
-					<configuration>
-						<fork>true</fork>
-						<classifier>boot</classifier>
-						<mainClass>${package.mainClass}</mainClass>
-					</configuration>
-					<!-- <executions>
-						<execution>
-							<id>springboot-package</id>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions> -->
-				</plugin>
+				<!-- endregion -->
+
+				<!-- region [maven-site] -->
 
 				<!-- =====[site]===== -->
 				<plugin>
@@ -785,7 +850,7 @@
 					<configuration>
 						<!-- [locales] -->
 						<locales>zh_CN,en</locales>
-						<outputDirectory>${site.basedir}/target/site/${project.artifactId}</outputDirectory>
+						<outputDirectory>${project.build.directory}/site/${project.artifactId}</outputDirectory>
 						<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 						<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
 						<reportPlugins>
@@ -793,7 +858,7 @@
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-javadoc-plugin</artifactId>
-								<version>2.9</version>
+								<!--<version>2.9</version>-->
 							</plugin>
 							<!-- [项目信息过滤] -->
 							<plugin>
@@ -824,7 +889,7 @@
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-surefire-plugin</artifactId>
 								<configuration>
-									<argLine>-Xmx256M</argLine>
+									<!--<argLine>-Xmx256M</argLine>-->
 									<includes>
 										<include>**/Test*.java</include>
 										<include>**/*Test.java</include>
@@ -836,6 +901,12 @@
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-checkstyle-plugin</artifactId>
+								<version>2.9.1</version>
+								<configuration>
+									<configLocation>${project.build.directory}/checkstyle_checks.xml</configLocation>
+									<suppressionsLocation>${project.build.directory}/checkstyle-suppressions.xml</suppressionsLocation>
+									<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+								</configuration>
 							</plugin>
 							<!-- [源码查看生成] -->
 							<plugin>
@@ -850,6 +921,7 @@
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>findbugs-maven-plugin</artifactId>
+								<version>2.5.2</version>
 								<configuration>
 									<xmlOutput>true</xmlOutput>
 								</configuration>
@@ -858,10 +930,7 @@
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-pmd-plugin</artifactId>
-								<configuration>
-									<!-- [多模块聚合] -->
-									<aggregate>true</aggregate>
-								</configuration>
+								<version>2.7.1</version>
 							</plugin>
 							<!-- [cobertura 代码覆盖率工具] -->
 							<plugin>
@@ -909,14 +978,21 @@
 						<port>9999</port>
 					</configuration>
 				</plugin>
+
+				<!-- endregion -->
+
 			</plugins>
 		</pluginManagement>
-		<!-- =====[plugins]===== -->
+		<!-- endregion -->
+		<!-- region =====[plugins]===== -->
 		<plugins>
+			<!-- region [spring-boot] -->
 			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- endregion -->
+			<!-- region [maven-tools] -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -929,13 +1005,12 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 			</plugin>
+			<!-- endregion -->
+
+			<!-- region [maven-lifecycle] -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -948,6 +1023,10 @@
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -983,24 +1062,41 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
+			<!-- endregion -->
+
+			<!-- region [maven-jrebel] -->
 			<plugin>
 				<groupId>org.zeroturnaround</groupId>
 				<artifactId>jrebel-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			<!-- endregion -->
+
+			<!-- region [maven-site] -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
+			<!-- endregion -->
 		</plugins>
+		<!-- endregion -->
 	</build>
 	<!-- endregion -->
 
 	<!-- region =====[repositories]===== -->
 	<repositories>
+		<repository>
+			<id>me</id>
+			<name>me</name>
+			<url>http://127.0.0.1:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>aliyun</id>
 			<name>aliyun</name>
@@ -1019,8 +1115,21 @@
 	</repositories>
 	<!-- endregion -->
 
-	<!-- =====[pluginRepositories]===== -->
+	<!-- region =====[pluginRepositories]===== -->
 	<pluginRepositories>
+		<pluginRepository>
+			<id>me</id>
+			<name>me</name>
+			<url>http://127.0.0.1:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</pluginRepository>
 		<pluginRepository>
 			<id>aliyun</id>
 			<name>aliyun</name>
@@ -1037,8 +1146,9 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	<!-- endregion -->
 
-	<!-- =====[developers]===== -->
+	<!-- region =====[开发人员信息]===== -->
 	<developers>
 		<developer>
 			<name>Qt</name>
@@ -1050,36 +1160,87 @@
 			<timezone>8</timezone>
 		</developer>
 	</developers>
+	<!-- endregion -->
 
-	<!-- =====[licenses]===== -->
+	<!-- region =====[许可证]===== -->
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
-	<!-- =====[scm]===== -->
+	<!-- endregion -->
+
+	<!-- region =====[持续集成信息]===== -->
+	<ciManagement>
+		<system>continuum</system>
+		<url>http://www.microvibe.io</url>
+		<notifiers>
+			<notifier>
+				<type>mail</type>
+				<sendOnError>true</sendOnError>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnSuccess>true</sendOnSuccess>
+				<sendOnWarning>false</sendOnWarning>
+				<configuration>
+					<address>kylinmania@163.com</address>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+	<!-- endregion -->
+
+	<!-- region =====[问题反馈信息]===== -->
+	<issueManagement>
+		<system>issue</system>
+		<url>http://www.microvibe.io</url>
+	</issueManagement>
+	<!-- endregion -->
+
+	<!-- region =====[分发管理]===== -->
+	<distributionManagement>
+		<!-- mvn site:deploy 部署的位置 -->
+		<site>
+			<id>local</id>
+			<name>filesystem</name>
+			<url>file:${project.basedir}/site</url>
+		</site>
+		<repository>
+			<id>releases</id>
+			<name>Internal Releases</name>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Releases</name>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<!-- endregion -->
+
+	<!-- region =====[scm]===== -->
 	<scm>
 		<connection>scm:git:git@github.com:microvibe/microvibe.git</connection>
 		<developerConnection>scm:git:git@github.com:microvibe/microvibe.git</developerConnection>
 		<url>git@github.com:microvibe/microvibe.git</url>
 	</scm>
+	<!-- endregion -->
 
-
-	<!-- =====[profiles]===== -->
+	<!-- region =====[profiles]===== -->
 	<profiles>
-		<!-- [development] -->
+		<!-- region [development] -->
 		<profile>
 			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<maven.test.skip>false</maven.test.skip>
+				<maven.test.skip>true</maven.test.skip>
 				<spring.activeProfile>dev</spring.activeProfile>
 			</properties>
 		</profile>
-		<!-- [Unit Testing] -->
+		<!-- endregion -->
+		<!-- region [Unit Testing] -->
 		<profile>
 			<id>sut</id>
 			<activation>
@@ -1090,7 +1251,8 @@
 				<spring.activeProfile>sut</spring.activeProfile>
 			</properties>
 		</profile>
-		<!-- [Integration Testing] -->
+		<!-- endregion -->
+		<!-- region [Integration Testing] -->
 		<profile>
 			<id>sit</id>
 			<activation>
@@ -1109,7 +1271,8 @@
 				</plugins>
 			</build>
 		</profile>
-		<!-- [production] -->
+		<!-- endregion -->
+		<!-- region [production] -->
 		<profile>
 			<id>pro</id>
 			<activation>
@@ -1120,7 +1283,22 @@
 				<spring.activeProfile>pro</spring.activeProfile>
 			</properties>
 		</profile>
-		<!-- oss -->
+		<!-- endregion -->
+		<!-- region [idea provided > compile] -->
+		<profile>
+			<id>idea</id>
+			<activation>
+				<property>
+					<name>idea.version</name>
+				</property>
+			</activation>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+				<project.dependencies.scope.provided>compile</project.dependencies.scope.provided>
+			</properties>
+		</profile>
+		<!-- endregion -->
+		<!-- region [oss] -->
 		<profile>
 			<id>oss</id>
 			<build>
@@ -1137,7 +1315,9 @@
 								</goals>
 								<configuration>
 									<excludes>
+										<exclude>**/*</exclude>
 										<exclude>rebel.xml</exclude>
+										<exclude>.gitkeep*</exclude>
 									</excludes>
 								</configuration>
 							</execution>
@@ -1182,5 +1362,16 @@
 				</repository>
 			</distributionManagement>
 		</profile>
+		<!-- endregion -->
+		<!-- region [modules]-->
+		<profile>
+			<id>example</id>
+			<modules>
+				<module>microvibe-example</module>
+			</modules>
+		</profile>
+		<!-- endregion -->
 	</profiles>
+	<!-- endregion -->
+
 </project>

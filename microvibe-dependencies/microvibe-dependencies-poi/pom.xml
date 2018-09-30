@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.microvibe.dependencies</groupId>
+		<artifactId>microvibe-dependencies</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<artifactId>microvibe-dependencies-poi</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<version.poi>3.15</version.poi>
+	</properties>
+
+	<dependencies>
+		<!-- =================================================================== -->
+		<!-- Begin: POI Libraries -->
+		<!-- =================================================================== -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-examples</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+		</dependency>
+		<!-- =================================================================== -->
+		<!-- End: POI Libraries -->
+		<!-- =================================================================== -->
+	</dependencies>
+</project>
