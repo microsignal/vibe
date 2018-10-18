@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.microvibe.booster</groupId>
+		<artifactId>microvibe-booster</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<artifactId>booster-dependencies</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>booster-dependencies-test</module>
+		<module>booster-dependencies-commons</module>
+		<module>booster-dependencies-database</module>
+		<module>booster-dependencies-mybatis</module>
+		<module>booster-dependencies-shiro</module>
+		<module>booster-dependencies-validator</module>
+		<module>booster-dependencies-serial</module>
+		<module>booster-dependencies-logging</module>
+		<module>booster-dependencies-jcaptcha</module>
+		<module>booster-dependencies-quartz</module>
+		<module>booster-dependencies-drools</module>
+		<module>booster-dependencies-jarslink</module>
+		<module>booster-dependencies-swagger</module>
+	</modules>
+
+	<properties>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-database</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-mybatis</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-shiro</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-validator</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-serial</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-logging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-jcaptcha</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-quartz</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-drools</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-jarslink</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-dependencies-swagger</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>
+

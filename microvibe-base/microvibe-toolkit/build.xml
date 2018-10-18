@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." name="microvibe-toolkit">
+
+	<import file="../build.xml" />
+
+</project>

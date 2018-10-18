@@ -1,0 +1,32 @@
+package io.microvibe.booster.core.base.mybatis.statement;
+
+public enum BuilderType {
+	NOOP,
+
+	SELECT_BY_EXAMPLE,
+	SELECT_BY_ENTITY,
+	SELECT_BY_MAP,
+
+	COUNT_BY_EXAMPLE,
+	COUNT_BY_ENTITY,
+	COUNT_BY_MAP,
+
+	EXISTS_BY_EXAMPLE,
+	EXISTS_BY_ENTITY,
+	EXISTS_BY_MAP,
+
+	GET_BY_ID,
+	EXISTS_BY_ID,
+
+	DELETE_BY_ID,
+
+	UPDATE_BY_ID,
+	UPDATE_SELECTIVE_BY_ID,
+
+	INSERT,
+	INSERT_SELECTIVE,
+	INSERT_BATCH,
+	//
+	;
+
+}

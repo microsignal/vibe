@@ -12,6 +12,13 @@
 	<artifactId>microvibe-booster</artifactId>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>booster-dependencies</module>
+		<module>booster-core</module>
+		<module>booster-system</module>
+		<module>booster-config</module>
+		<!--<module>booster-example</module>-->
+	</modules>
 	<build>
 		<!--<finalName>${project.artifactId}</finalName>-->
 		<pluginManagement>
@@ -22,30 +29,25 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- =====[booster-core]===== -->
 			<dependency>
-				<groupId>io.github.microvibe.dependencies</groupId>
-				<artifactId>microvibe-dependencies</artifactId>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-core</artifactId>
 				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-config</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.microvibe.booster</groupId>
+				<artifactId>booster-system</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-
-
-
-		<!-- =================================================================== -->
-		<!-- Begin: scope:test -->
-		<!-- =================================================================== -->
-		<dependency>
-			<groupId>io.github.microvibe.dependencies</groupId>
-			<artifactId>microvibe-dependencies-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- =================================================================== -->
-		<!-- End: scope:test -->
-		<!-- =================================================================== -->
 	</dependencies>
 
 </project>
