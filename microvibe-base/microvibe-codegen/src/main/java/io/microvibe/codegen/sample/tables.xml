@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<catalog name="">
+		<schema name="">
+			<table name="" comment="" tablespace="" javaPackageName="" javaClassName=""
+				javaVariableName="">
+				<column name="" type="" comment="" defaultValue="" isPrimary="" nullable=""
+					javaClassName="" javaVariableName="" javaClassType="" javaJdbcType="" />
+			</table>
+		</schema>
+	</catalog>
+</xml>

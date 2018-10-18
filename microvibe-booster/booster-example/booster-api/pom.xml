@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.microvibe.booster</groupId>
+		<artifactId>booster-example</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<artifactId>booster-api</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<package.mainClass>io.microvibe.booster.boot.BootstrapApplication</package.mainClass>
+	</properties>
+
+	<build>
+		<finalName>booster-api</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.12</version>
+				<!-- [mvn docker:build] -->
+				<configuration>
+					<imageName>${project.build.finalName}-${project.version}</imageName>
+					<!-- [指定Dockerfile所在的路径] -->
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.war</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.microvibe.booster</groupId>
+			<artifactId>booster-api-jar</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>${project.dependencies.scope.provided}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>${project.dependencies.scope.provided}</scope>
+		</dependency>
+	</dependencies>
+</project>

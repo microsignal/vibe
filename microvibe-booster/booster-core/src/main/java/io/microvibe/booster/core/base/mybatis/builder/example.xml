@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="example">
+
+	<sql id="whereByExample">
+		<trim prefixOverrides="and | or ">
+			<foreach collection="criteria" item="criterion" separator="and">
+				<choose>
+					<when test="criterion.criteria == null or criterion.criteria.size() == 0">
+						<choose>
+							<when test="criterion.proto">
+								<![CDATA[ ${criterion.protoSql} ]]>
+							</when>
+							<when test="criterion.noValue">
+								<![CDATA[ ${criterion.column} ${criterion.symbol} ]]>
+							</when>
+							<when test="criterion.singleValue">
+								<![CDATA[ ${criterion.column} ${criterion.symbol} #{criterion.value} ]]>
+							</when>
+							<when test="criterion.betweenValue">
+								<![CDATA[ ${criterion.column} ${criterion.symbol} #{criterion.value} and #{criterion.secondValue} ]]>
+							</when>
+							<when test="criterion.listValue">
+								<![CDATA[ ${criterion.column} ${criterion.symbol} ]]>
+								<foreach collection="criterion.value" item="listItem" open="(" separator="," close=")">
+									#{listItem}
+								</foreach>
+							</when>
+						</choose>
+					</when>
+					<otherwise>
+						<foreach collection="criterion.criteria" index="idx" item="criterion_2" open="(" close=")">
+							<if test="idx != 0">${criterion.conj}</if>
+							<choose>
+								<when test="criterion_2.criteria == null or criterion_2.criteria.size() == 0">
+									<choose>
+										<when test="criterion_2.proto">
+											<![CDATA[ ${criterion_2.protoSql} ]]>
+										</when>
+										<when test="criterion_2.noValue">
+											<![CDATA[ ${criterion_2.column} ${criterion_2.symbol} ]]>
+										</when>
+										<when test="criterion_2.singleValue">
+											<![CDATA[ ${criterion_2.column} ${criterion_2.symbol} #{criterion_2.value} ]]>
+										</when>
+										<when test="criterion_2.betweenValue">
+											<![CDATA[ ${criterion_2.column} ${criterion_2.symbol} #{criterion_2.value} and #{criterion_2.secondValue} ]]>
+										</when>
+										<when test="criterion_2.listValue">
+											<![CDATA[ ${criterion_2.column} ${criterion_2.symbol} ]]>
+											<foreach collection="criterion_2.value" item="listItem" open="(" separator="," close=")">
+												#{listItem}
+											</foreach>
+										</when>
+									</choose>
+								</when>
+								<otherwise>
+									<foreach collection="criterion_2.criteria" index="idx" item="criterion_3" open="(" close=")">
+										<if test="idx != 0">${criterion_2.conj}</if>
+										<choose>
+											<when test="criterion_3.criteria == null or criterion_3.criteria.size() == 0">
+												<choose>
+													<when test="criterion_3.proto">
+														<![CDATA[ ${criterion_3.protoSql} ]]>
+													</when>
+													<when test="criterion_3.noValue">
+														<![CDATA[ ${criterion_3.column} ${criterion_3.symbol} ]]>
+													</when>
+													<when test="criterion_3.singleValue">
+														<![CDATA[ ${criterion_3.column} ${criterion_3.symbol} #{criterion_3.value} ]]>
+													</when>
+													<when test="criterion_3.betweenValue">
+														<![CDATA[ ${criterion_3.column} ${criterion_3.symbol} #{criterion_3.value} and #{criterion_3.secondValue} ]]>
+													</when>
+													<when test="criterion_3.listValue">
+														<![CDATA[ ${criterion_3.column} ${criterion_3.symbol} ]]>
+														<foreach collection="criterion_3.value" item="listItem" open="(" separator=","
+															close=")">
+															#{listItem}
+														</foreach>
+													</when>
+												</choose>
+											</when>
+											<otherwise>
+												<foreach collection="criterion_3.criteria" index="idx" item="criterion_4" open="(" close=")">
+													<if test="idx != 0">${criterion_3.conj}</if>
+													<choose>
+														<when test="criterion_4.criteria == null or criterion_4.criteria.size() == 0">
+															<choose>
+																<when test="criterion_4.proto">
+																	<![CDATA[ ${criterion_4.protoSql} ]]>
+																</when>
+																<when test="criterion_4.noValue">
+																	<![CDATA[ ${criterion_4.column} ${criterion_4.symbol} ]]>
+																</when>
+																<when test="criterion_4.singleValue">
+																	<![CDATA[ ${criterion_4.column} ${criterion_4.symbol} #{criterion_4.value} ]]>
+																</when>
+																<when test="criterion_4.betweenValue">
+																	<![CDATA[ ${criterion_4.column} ${criterion_4.symbol} #{criterion_4.value} and #{criterion_4.secondValue} ]]>
+																</when>
+																<when test="criterion_4.listValue">
+																	<![CDATA[ ${criterion_4.column} ${criterion_4.symbol} ]]>
+																	<foreach collection="criterion_4.value" item="listItem" open="(" separator=","
+																		close=")">
+																		#{listItem}
+																	</foreach>
+																</when>
+															</choose>
+														</when>
+														<otherwise>
+
+														</otherwise>
+													</choose>
+												</foreach>
+											</otherwise>
+										</choose>
+									</foreach>
+								</otherwise>
+							</choose>
+						</foreach>
+					</otherwise>
+				</choose>
+			</foreach>
+		</trim>
+	</sql>
+</mapper>

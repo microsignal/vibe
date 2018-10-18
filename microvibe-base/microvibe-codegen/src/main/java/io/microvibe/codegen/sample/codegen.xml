@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env>
+	<outdir>D:\Workspaces\.tmpws\_tmp_</outdir>
+	<property>
+		<entry key="cap4j" value="false" />
+		<entry key="src.dir" value="src/main/java" />
+		<entry key="web.dir" value="WebRoot/view" />
+		<entry key="vo.dir" value="vo" />
+		<entry key="mapper.dir" value="mapper" />
+		<entry key="service.dir" value="service" />
+		<entry key="service.impl.dir" value="service/impl" />
+		<entry key="controller.dir" value="ctrler" />
+		<entry key="jsp.dir" value="adm/pages/sys" />
+	</property>
+
+	<group>
+		<template>
+			<path>java-vo.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${vo.dir}</outdir>
+			<filename>${tableJavaName}VO.java</filename>
+		</template>
+		<template>
+			<path>java-mapper.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${mapper.dir}</outdir>
+			<filename>${tableJavaName}Mapper.java</filename>
+		</template>
+		<template>
+			<path>java-mapper.xml.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${mapper.dir}</outdir>
+			<filename>${tableJavaName}Mapper.sqlmap.xml</filename>
+		</template>
+		<template>
+			<path>java-service.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${service.dir}</outdir>
+			<filename>I${tableJavaName}Service.java</filename>
+		</template>
+		<template>
+			<path>java-service.impl.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${service.impl.dir}</outdir>
+			<filename>${tableJavaName}ServiceImpl.java</filename>
+		</template>
+		<template>
+			<path>java-controller.vm</path>
+			<outdir>${src.dir}/${tablePackage}/${controller.dir}</outdir>
+			<filename>${tableJavaName}Ctrler.java</filename>
+		</template>
+		<template>
+			<property>
+				<entry key="ctrlerPackage" value="org.mania.infinite.adm" />
+				<entry key="ctrlerPackage.dir" value="org/mania/infinite/adm" />
+			</property>
+			<path>java-controller-adm.vm</path>
+			<outdir>${src.dir}/${ctrlerPackage.dir}/${controller.dir}</outdir>
+			<filename>Adm${tableJavaName}Ctrler.java</filename>
+		</template>
+		<template>
+			<path>jsp-adm-list.vm</path>
+			<outdir>${web.dir}/${jsp.dir}</outdir>
+			<filename>${tableJavaName}List.jsp</filename>
+		</template>
+		<template>
+			<path>jsp-adm-form.vm</path>
+			<outdir>${web.dir}/${jsp.dir}</outdir>
+			<filename>${tableJavaName}Form.jsp</filename>
+		</template>
+
+		<config package="com.antpower.icms.base.sys" table="sys_code_info" catalog="icms-shzb"
+			schema="" />
+	</group>
+</env>

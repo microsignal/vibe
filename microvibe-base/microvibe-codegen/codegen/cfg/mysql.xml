@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database xmlns="http://www.smarter.org/schema/dbv/database" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.smarter.org/schema/dbv/database database.xsd">
+
+	<jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+	<!-- <jdbc-url>jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&amp;characterEncoding=UTF-8</jdbc-url> -->
+	<jdbc-url>jdbc:mysql://121.43.183.94:3306/mccpdb_dev?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;useSSL=false</jdbc-url>
+	<jdbc-username>mccp_dev</jdbc-username>
+	<jdbc-password>mccp_dev2017</jdbc-password>
+	<jdbc-info-properties-path>./codegen/cfg/mysql.properties</jdbc-info-properties-path>
+
+</database>

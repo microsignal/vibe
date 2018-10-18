@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://ch.qos.logback/xml/ns/logback"
+	xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback https://raw.githubusercontent.com/enricopulatzo/logback-XSD/master/src/main/xsd/logback.xsd"
+	scan="true" scanPeriod="60 seconds" debug="false">
+
+	<!--引入默认的一些设置-->
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+	<property name="appName" value="booster-app"/>
+	<!--<property name="logFilePath" value="${log.dir:-${java.io.tmpdir:-/data/logs}}/${appName}"/>-->
+	<property name="userLogPath" value="${user.home:-/data}/logs"/>
+	<property name="logFilePath" value="${log.dir:-/data/logs}/${appName}"/>
+	<property name="logFileName" value="${appName}"/>
+
+
+	<appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFilePath}/${logFileName}.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>300</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%X{user}][%thread] %-5level %logger{40}[%L] - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+	<appender name="infoAsyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<queueSize>512</queueSize>
+		<maxFlushTime>1000</maxFlushTime>
+		<appender-ref ref="infoAppender"/>
+	</appender>
+	<appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFilePath}/${logFileName}-debug.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%X{user}][%thread] %-5level %logger{40}[%L] - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<appender name="debugAsyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<queueSize>512</queueSize>
+		<maxFlushTime>1000</maxFlushTime>
+		<appender-ref ref="debugAppender"/>
+	</appender>
+	<appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFilePath}/${logFileName}-error.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>300</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%X{user}][%thread] %-5level %logger{40}[%L] - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<!-- 控制台 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%X{user}][%thread] %-5level %logger{40}[%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			<driverClass>org.h2.Driver</driverClass>
+			<url>jdbc:h2:mem:booster</url>
+			<user>sa</user>
+			<password></password>
+		</connectionSource>
+		<!--
+		<connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+			<dataSource class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
+				<serverName>localhost</serverName>
+				<port>3306</port>
+				<databaseName>test</databaseName>
+				<user>root</user>
+				<password>root</password>
+			</dataSource>
+		</connectionSource>
+		-->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+
+	<logger name="org.mybatis" level="info">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="io.microvibe.booster.core.base.mybatis" level="debug" additivity="false">
+		<appender-ref ref="debugAsyncAppender"/>
+		<appender-ref ref="infoAsyncAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</logger>
+	<logger name="io.microvibe.booster.core" level="info">
+	</logger>
+	<logger name="com.antengine" level="debug">
+	</logger>
+	<logger name="org.hibernate.engine.internal" level="error">
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="DB"/>
+		<appender-ref ref="debugAsyncAppender"/>
+		<appender-ref ref="infoAsyncAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</root>
+</configuration>
+
+
+

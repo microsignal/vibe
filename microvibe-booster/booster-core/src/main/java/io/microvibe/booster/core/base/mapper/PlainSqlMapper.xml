@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.microvibe.booster.core.base.mapper.PlainSqlMapper">
+
+	<select id="count" parameterType="map" resultType="long" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+		${sql}
+	</select>
+	<select id="get" parameterType="map" resultType="map" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+		${sql}
+	</select>
+
+	<select id="select" parameterType="map" resultType="map" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+		${sql}
+	</select>
+
+	<update id="update" parameterType="map" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="map" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+	${sql}
+	</delete>
+
+	<insert id="insert" parameterType="map" lang="io.microvibe.booster.core.base.mybatis.lang.VelocityLangDriver">
+	${sql}
+	</insert>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<castors>
+	<!-- prime type -->
+	<castor type="java.lang.Boolean" class="io.microvibe.castor.support.BooleanCastor" />
+	<castor type="java.lang.Integer" class="io.microvibe.castor.support.IntegerCastor" />
+	<castor type="java.lang.Long" class="io.microvibe.castor.support.LongCastor" />
+	<castor type="java.lang.Byte" class="io.microvibe.castor.support.ByteCastor" />
+	<castor type="java.lang.Short" class="io.microvibe.castor.support.ShortCastor" />
+	<castor type="java.lang.Character" class="io.microvibe.castor.support.CharacterCastor" />
+	<castor type="java.lang.Double" class="io.microvibe.castor.support.DoubleCastor" />
+	<castor type="java.lang.Float" class="io.microvibe.castor.support.FloatCastor" />
+
+	<!-- basic type -->
+	<castor type="java.lang.Object" class="io.microvibe.castor.support.ObjectCastor" />
+	<castor type="java.lang.String" class="io.microvibe.castor.support.StringCastor" />
+	<castor type="java.lang.StringBuilder" class="io.microvibe.castor.support.StringBuilderCastor" />
+	<castor type="java.lang.StringBuffer" class="io.microvibe.castor.support.StringBufferCastor" />
+	<castor type="java.math.BigDecimal" class="io.microvibe.castor.support.BigDecimalCastor" />
+	<castor type="java.math.BigInteger" class="io.microvibe.castor.support.BigIntegerCastor" />
+	<castor type="java.util.Date" class="io.microvibe.castor.support.DateCastor" />
+	<castor type="java.sql.Date" class="io.microvibe.castor.support.SqlDateCastor" />
+	<castor type="java.sql.Timestamp" class="io.microvibe.castor.support.TimestampCastor" />
+	<castor type="java.sql.Time" class="io.microvibe.castor.support.TimeCastor" />
+
+	<!-- collection type -->
+	<castor type="java.util.Collection" class="io.microvibe.castor.support.AnyCollectionCastor" />
+	<castor type="java.util.List" class="io.microvibe.castor.support.AnyCollectionCastor" />
+	<castor type="java.util.Set" class="io.microvibe.castor.support.AnyCollectionCastor" />
+
+</castors>

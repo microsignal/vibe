@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changes>
+	<!--
+	<change>
+		<charset>utf-8</charset>
+		<copyForcedly>true</copyForcedly>
+		<fileExtensions>.xml .java .properties</fileExtensions>
+		<dir src="./src/main/java" target="./target/java" />
+		<package name="org.microvibe" mapping="io.githut.microvibe" />
+	</change>
+	 -->
+	<change>
+		<charset>utf-8</charset>
+		<copyForcedly>false</copyForcedly>
+		<fileExtensions>.xml .java .properties</fileExtensions>
+		<dir src="../microvibe-toolkit/src/main/java"
+			target="../microvibe-toolkit/target/java" />
+		<package name="io.github.microvibe" mapping="io.microvibe" />
+	</change>
+
+</changes>

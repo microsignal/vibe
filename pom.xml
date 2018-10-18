@@ -19,14 +19,8 @@
 
 	<modules>
 		<module>microvibe-dependencies</module>
-		<!--
-		<module>microvibe-toolkit</module>
-		<module>microvibe-util</module>
-		<module>microvibe-dbv</module>
-		<module>microvibe-codegen</module>
-		<module>microvibe-castor</module>
-		<module>microvibe-commons</module>
-		-->
+		<module>microvibe-base</module>
+		<module>microvibe-booster</module>
 	</modules>
 
 	<!-- region =====[properties]===== -->

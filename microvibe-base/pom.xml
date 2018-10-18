@@ -12,6 +12,13 @@
 	<artifactId>microvibe-base</artifactId>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>microvibe-toolkit</module>
+		<module>microvibe-util</module>
+		<module>microvibe-castor</module>
+		<module>microvibe-dbv</module>
+		<module>microvibe-codegen</module>
+	</modules>
 	<build>
 		<!--<finalName>${project.artifactId}</finalName>-->
 		<pluginManagement>

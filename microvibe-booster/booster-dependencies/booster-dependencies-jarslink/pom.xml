@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>io.github.microvibe.booster</groupId>
+		<artifactId>booster-dependencies</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>booster-dependencies-jarslink</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+	</properties>
+	<dependencies>
+
+		<!-- [Begin: jarslink] -->
+		<dependency>
+			<groupId>com.alipay.jarslink</groupId>
+			<artifactId>jarslink-api</artifactId>
+			<version>1.6.1.20180301</version>
+		</dependency>
+		<!-- [End: jarslink] -->
+
+	</dependencies>
+</project>

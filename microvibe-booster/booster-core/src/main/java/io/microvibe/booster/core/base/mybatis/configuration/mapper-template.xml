@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="">
+
+	<resultMap id="" type="" autoMapping="true">
+		<id column="" property="" javaType="" jdbcType="" typeHandler=""></id>
+		<result column="" property="" javaType="" jdbcType="" typeHandler=""></result>
+		<association property="" javaType="" columnPrefix="" autoMapping="true">
+		</association>
+		<collection property="" ofType="" columnPrefix="" autoMapping="true">
+		</collection>
+	</resultMap>
+
+</mapper>

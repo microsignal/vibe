@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>io.github.microvibe.booster</groupId>
+		<artifactId>booster-dependencies</artifactId>
+		<version>1.1.1</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>booster-dependencies-drools</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<drools.version>7.0.0.Final</drools.version>
+	</properties>
+	<dependencies>
+		<!-- [Begin: drools] -->
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<!-- [End: drools] -->
+
+	</dependencies>
+</project>

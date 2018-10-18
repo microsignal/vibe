@@ -76,7 +76,7 @@ ehthumbs.db
 Desktop.ini
 .DS_Store
 local.properties
-/local
+local/
 
 #js
 node_modules/

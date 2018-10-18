@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.microvibe.booster.system.mapper.SysMenuMapper">
+	<resultMap id="SysMenuResultMap" type="io.microvibe.booster.system.entity.SysMenu" autoMapping="true">
+		<id column="id" jdbcType="VARCHAR" property="id"/>
+		<result column="type" property="type"
+			jdbcType="TINYINT" typeHandler="io.microvibe.booster.core.base.mybatis.type.BlankableEnumOrdinalTypeHandler" />
+	</resultMap>
+
+	<resultMap id="MenuAndRoleMap" type="io.microvibe.booster.system.entity.SysMenu" autoMapping="true">
+		<id column="id" jdbcType="VARCHAR" property="id"/>
+		<result column="type" property="type"
+			jdbcType="TINYINT" typeHandler="io.microvibe.booster.core.base.mybatis.type.BlankableEnumOrdinalTypeHandler" />
+		<collection property="roleList" ofType="io.microvibe.booster.system.entity.SysRole"
+			columnPrefix="r_" autoMapping="true">
+		</collection>
+	</resultMap>
+</mapper>

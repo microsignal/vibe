@@ -1,0 +1,65 @@
+##########
+## 支付宝
+##########
+alipay:
+  # 开放授权
+  # oauth2: https://openauth.alipay.com/oauth2
+  oauth2Url: https://openauth.alipaydev.com/oauth2
+  # 开放授权回调
+  oauth2CallbackUrl: http://q1709n5247.iok.la:32800/openapi/pay/alipay/oauth2_callback
+  # 开放授权回调之后的默认跳转页面
+  oauth2ResultUrl: http://q1709n5247.iok.la:32800/openapi/pay/alipay/oauth2_result
+  # 支付宝网关
+  # gateway: https://openapi.alipay.com/gateway.do
+  gateway: https://openapi.alipaydev.com/gateway.do
+  appId: 2016091700533237
+  # 合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
+  partner: 2088102176054671
+  # 收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
+  sellerId: 2088102176054671
+  # 商户的私钥,需要PKCS8格式
+  # RSA公私钥生成：https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.nBDxfy&treeId=58&articleId=103242&docType=1
+  merchantPrivateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDOu5c92OYZeh3Zpzy1p5xpWYAMqn/SsIXvfafqU8GAZon+xlFbgg0AhIuJRjJniMy3MR6ujth0hUpY+MTgOfx5ZARjKKlcDEXIlMBEFEU0M62Iit+SKF1qbl4iFGqd7rNdYBhMFS8+IQgPZtt0l1FYdSsCyLt8jEAqKhC6NByb01kJ0Rn0FvGiS4lLNf7ay03KGAjdoJup4j58KKiW3j1F2tiSuvKzQbqAzai0Ie3Sj8gdiKUs3iICMlQGD8Yh/bWGGqdYEulR2tcv5pWveyQ5Q8BQivyswDhz4ScKxoJn+YpfxTNEboP3eJG2HNNAr61Udx1RHrA6lrDFHxSHeNYvAgMBAAECggEBAJDHjXbR1OuYuxj35yts07xv4p58NYKO/22muZcAyy4qIZBcwRNt878eFD6x+5DInF3bN5qWDX8k7dl7dx11XpyA8BWln14IdkKv8ip7a6/QVUKfx00rmah03NXPKI+sYM8PAlUeLPS821E1/pEbe+uQOuv7OlpSOomM5iQRZMu3KI6YddTvLVfQyqWslaEbGFwjA9FF0Le9RhStmD84ZSqgBzbxnZiq5POn5ngUWfc2CZC9iwFybxzFSb7i3/11TJ+rTUBaprYuELeHFg0pCAKjJdcbh2qncKNmpXJyEZiPokZZMS2ZImtsL9vV+IQhenK6wv6pr2U7he55tn+61MkCgYEA6Q4ZvTF5r62dZyVWn2/1x3EBt+KMgGEmXL1TkqQauxzMjPtoYUqD6jS0hAgz6ZjdxZgJUhgEZvRkQ9ITgumbNQfQfRhaL65SvmTu6iTkMONJ1zU4WFuDo9Bzh6HxU+28nic/LNMp5JARB13Q/wSCkC/Qnf/xoMhTL5QmBALQrAUCgYEA4xYQtCNrwQKpqyxAjSltBK6HrB0CgN4nt3SeAZzuLP0aOKeqiV1QydGHaIH98jkU7/LubaR9oONEYVuT/PB1aO7qSOIzYlZkqBvUHVNAtQMsnWYrAmPRGLmWPB1aMs7PvAYgWKGRupHgFCLt/kpX+D7XlSsN3pYKIDkOlsseQ6MCgYBUFH48v4jDVMOg3tutkdr+JUsVaGqANox8kOGB2iq6rt0tT9aMozGMYY9uwvbXpAr+qqdSMtADxNAXl8bqSBVywGr7drmy0hWQEyIO31hkOtv9BHpbhkir5RyJJmfGe9K8zDQCm/xVNZSvL62jE6F3G4kMN7aY5yz70VsVv15BcQKBgQDTwq3M7gL7t7n0r416lZjd9sr5ywuclI3A2/TEWE0akuOy1VeIRQajTMrSv/XJvUUzBP0mLXAhag1IJJf6FVnHgpPjZ1y3ZQz0Xw8MUahTpCQkmzOcROyl+9qHMG/+VTEOiz/6pqA4tPOak4AP08/45NEwfzety4ihx9M89yi/tQKBgHW7lT0L8kFJump8QHPKJu16HQStQwmHQZrHQ6maMzry4iA609mRfViC9WUBJrZ2DEmV1k47/oGHaH2NG0GTIbnGrhCkBMSXavPiKq4JLw5xYSsfZicBhu9mIXs+PJSdPKbYkIK9JTTp2YaCprzePDs5nhCtB42+DVW8eumPjhkn
+  # 支付宝的公钥,查看地址：https://b.alipay.com/order/pidAndKey.htm
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvbqzAtaWKy3EqkBdAvPp/2Js+QXpsAcRCFUJxjDDr8NhwAsztSySV1vYCrzWntnA8Yp1L7X6mpjB27iKvu4SnKsA0QVbMCmCtgkhRJmK+0NmYPwWXkyP9fWtbNuPvU+LnKAbDqlsbplrBRCjkNq5UHaEzdbAEsmj2u/JVBfdHLT2hI22O6uggHiqxNS1vkfgycthvuKSWL8mHldA8+RIYxwEg2yexbLyaRcMV1whHiQCtEYOCqVP+QpJEoSM4/awwfbbW2MZQ/3RTBuOYhmHkCSG+SL1PkH7FKwyD9QCtmdE43FDbuhxq1IkCklh9RZwYi8HwJARZnASa15/ylemPwIDAQAB
+  # 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  notifyUrl: http://q1709n5247.iok.la:32800/openapi/pay/alipay/aync_notify
+  # 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  returnUrl: http://q1709n5247.iok.la:32800/openapi/pay/alipay/sync_return
+  # 签名方式
+  signType: RSA2
+  # 调试用，创建TXT日志文件夹路径，见AlipayCore.java类中的logResult(String sWord)打印方法。
+  logPath: /data/log/alipay/
+  # 字符编码格式 目前支持 gbk 或 utf-8
+  inputCharset: utf-8
+  # 请在这里配置防钓鱼信息，如果没开通防钓鱼功能，为空即可
+  # 防钓鱼时间戳  若要使用请调用类文件submit中的query_timestamp函数
+  antiPhishingKey:
+  # 客户端的IP地址 非局域网的外网IP地址，如：221.0.0.1
+  exterInvokeIp:
+
+wechat:
+  # 这个就是自己要保管好的私有Key了（切记只能放在自己的后台代码里，不能放在任何可能被看到源代码的客户端程序中）
+  # 每次自己Post数据给API的时候都要用这个key来对所有字段进行签名，生成的签名会放在Sign这个字段，API收到Post数据的时候也会用同样的签名算法对Post过来的数据进行签名和验证
+  # 收到API的返回的时候也要用这个key来对返回的数据算下签名，跟API的Sign数据进行比较，如果值不一致，有可能数据被第三方给篡改
+  key: 27799ccd73ef4e61b6f71688590f106a
+  # 微信分配的公众号ID（开通公众号之后可以获取到）https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=526901686&lang=zh_CN
+  appid: wx48458e0f0203a48c
+  # 微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到） https://pay.weixin.qq.com/index.php/core/account/info
+  mchid: 1277465501
+  # 受理模式下给子商户分配的子商户号 如果没有就和mchid一样
+  submchid: 1277465501
+  # HTTPS证书的本地路径 https://pay.weixin.qq.com/index.php/core/cert/api_cert
+  certLocalPath: ${user.home}/ssl/kuaibo/apiclient_cert.p12
+  # HTTPS证书密码，默认密码等于商户号MCHID
+  certPassword: 1277465501
+  # 是否使用异步线程的方式来上报API测速，默认为异步模式
+  useThreadToDoReport: true
+  # 填写为本机的IP地址
+  ip: 123.12.12.123
+  # 支付结果通用通知URL https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7
+  notifyUrl:http://q1709n5247.iok.la:32800/openapi/pay/wechat/pay_result_callback
+
+
+
+
