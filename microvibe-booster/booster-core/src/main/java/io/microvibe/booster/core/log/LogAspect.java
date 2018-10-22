@@ -62,7 +62,7 @@ public class LogAspect {
 		try {
 			before(logger, joinPoint);
 			Object rs = joinPoint.proceed(joinPoint.getArgs());
-			after(logger, joinPoint, rs);
+			afterReturning(logger, joinPoint, rs);
 			return rs;
 		} catch (Throwable throwable) {
 			afterThrowing(logger, joinPoint, throwable);
@@ -155,7 +155,7 @@ public class LogAspect {
 
 	}
 
-	private void after(Logger logger, ProceedingJoinPoint joinPoint, Object rs) {
+	private void afterReturning(Logger logger, ProceedingJoinPoint joinPoint, Object rs) {
 		try {
 			LogInfo info = local.get();
 			if (systemEnv.getMethodLogLevel().ordinal() <= info.getLevel().ordinal()

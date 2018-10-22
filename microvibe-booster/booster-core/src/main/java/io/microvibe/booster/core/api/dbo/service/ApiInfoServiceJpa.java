@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApiInfoServiceJpa extends JpaBaseService<ApiInfo, Long> {
-	@Autowired
+	@Autowired(required = false)
 	@BaseComponent
 	ApiInfoRepository apiInfoRepository;
 

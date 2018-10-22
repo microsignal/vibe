@@ -177,7 +177,12 @@ public class ExceptionAdvice {
 		return DataKit.buildResponse(ReplyCode.Error, "mvc.content_type_not_supported");
 	}
 
-	@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+	/**
+	 * 301 永远重定向 chrome会将该状态码缓冲到本地
+	 * 302 临时重定向
+	 */
+//	@ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+	@ResponseStatus(HttpStatus.FOUND)
 	@ExceptionHandler(RedirectException.class)
 	public ModelAndView handleRedirectException(RedirectException e, HttpServletRequest request) {
 		logger.error("通用异常", e);

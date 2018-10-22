@@ -13,6 +13,7 @@ import io.microvibe.booster.core.search.SearchKey;
 import io.microvibe.booster.core.search.Searches;
 import io.microvibe.booster.core.validation.Validations;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -63,7 +64,20 @@ public class DataKit {
 		List<SearchModel> searchModels = dataModel.getSearches();
 		for (SearchModel model : searchModels) {
 			SearchKey key = Searches.toSearchKey(model.getKey(), model.getOp());
-			param.put(key.toString(), key.getSymbol().repair(model.getVal()));
+			//param.put(key.toString(), key.getSymbol().repair(model.getVal()));
+			String searchKey = key.toString();
+			int i = searchKey.indexOf('.');
+			if(i >0){
+				String sub = searchKey.substring(0, i);
+				String subKey = searchKey.substring(i + 1);
+				Object o = param.get(sub);
+				if(o == null || !(o instanceof Map)){
+					param.put(sub,o = new HashMap<String,Object>());
+				}
+				((Map<String, Object>)o).put(subKey, key.getSymbol().repair(model.getVal()));
+			}else {
+				param.put(searchKey, key.getSymbol().repair(model.getVal()));
+			}
 		}
 		return param;
 	}
@@ -125,7 +139,7 @@ public class DataKit {
 			}
 		}
 		// 尝试从请求体获取内容, 需要注意重复读问题 @see HttpRequestWrapperFilter
-		if (paramValue == null) {
+		if (paramValue == null && !ServletFileUpload.isMultipartContent(request)) {
 			try {
 				ServletInputStream in = request.getInputStream();
 				if (in != null) {

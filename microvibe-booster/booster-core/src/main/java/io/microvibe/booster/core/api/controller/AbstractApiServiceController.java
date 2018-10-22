@@ -3,6 +3,7 @@ package io.microvibe.booster.core.api.controller;
 import io.microvibe.booster.core.api.ApiConstants;
 import io.microvibe.booster.core.api.model.*;
 import io.microvibe.booster.core.api.support.ApiServiceSupport;
+import io.microvibe.booster.core.api.tools.DataKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,15 @@ public abstract class AbstractApiServiceController {
 	}
 
 	protected final void exec(RequestData data, HttpServletResponse response) throws IOException {
-		ResponseData responseData = apiServiceSupport.execute(data);
+		ResponseData responseData = null;
+		try {
+			responseData = apiServiceSupport.execute(data);
+		} catch (Exception e) {
+			responseData = DataKit.buildResponse(e);
+			if(data.getHead().getBooleanValue(ApiConstants.HTTP_HEADER_MERGED)){
+				responseData.setHead(ApiConstants.HTTP_HEADER_MERGED, Boolean.TRUE);
+			}
+		}
 		writeAndFlush(response, responseData);
 	}
 

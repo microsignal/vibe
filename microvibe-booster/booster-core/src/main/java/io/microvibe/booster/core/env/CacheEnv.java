@@ -63,7 +63,7 @@ public class CacheEnv implements InitializingBean {
 		cacheExpires.put(CacheNames.API_ACCESS_TOKEN_CACHE_NAME, Long.valueOf(3600 * 2));// 2h
 		cacheExpires.put(CacheNames.API_APP_KEY_CACHE_NAME, Long.valueOf(0));// 0s
 
-		cacheExpires.put(CacheNames.SYS_USER_AUTHC_CACHE_NAME, Long.valueOf(3600 * 12));// 12h
+		cacheExpires.put(CacheNames.SYS_USER_AUTHC_CACHE_NAME, Long.valueOf(3600 * 2));// 2h
 
 		cacheExpires.put(CacheNames.PASSWORD_RETRY_CACHE_NAME, Long.valueOf(600L));// 10min
 		cacheExpires.put(CacheNames.CAPTCHA_CACHE_NAME, Long.valueOf(600L));

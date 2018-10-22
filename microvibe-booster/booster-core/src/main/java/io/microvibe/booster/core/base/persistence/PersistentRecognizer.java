@@ -2,10 +2,12 @@ package io.microvibe.booster.core.base.persistence;
 
 import io.microvibe.booster.commons.utils.StringUtils;
 import io.microvibe.booster.core.base.utils.NameCastor;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -119,9 +121,30 @@ public class PersistentRecognizer {
 	public static String propertyToColumn(Class<?> entityClass, String property) {
 		if (entityClass != null) {
 			try {
-				EntityMetaData entityMetaData = PersistentRecognizer.entityMetaData(entityClass);
-				FieldMetaData fieldMetaData = entityMetaData.getFieldMetaData(property);
-				return fieldMetaData.getColumnName();
+				int i = property.indexOf('.');
+				if (i > 0) {
+					String sub = property.substring(0, i);
+					String subKey = property.substring(i + 1);
+					EntityMetaData entityMetaData = PersistentRecognizer.entityMetaData(entityClass);
+					JoinMetaData joinMetaData = entityMetaData.getJoinMetaData(sub);
+					if (joinMetaData != null) {
+						EntityMetaData tableMetaData = joinMetaData.getTableMetaData();
+						FieldMetaData fieldMetaData = tableMetaData.getFieldMetaData(subKey);
+						return sub + "." + fieldMetaData.getColumnName();
+					} else {
+						PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(entityMetaData.getEntityClass(), sub);
+						if (propertyDescriptor != null) {
+							Class<?> propertyType = propertyDescriptor.getPropertyType();
+							EntityMetaData tableMetaData = PersistentRecognizer.entityMetaData(propertyType);
+							FieldMetaData fieldMetaData = tableMetaData.getFieldMetaData(subKey);
+							return sub + "." + fieldMetaData.getColumnName();
+						}
+					}
+				}else {
+					EntityMetaData entityMetaData = PersistentRecognizer.entityMetaData(entityClass);
+					FieldMetaData fieldMetaData = entityMetaData.getFieldMetaData(property);
+					return fieldMetaData.getColumnName();
+				}
 			} catch (Exception e) {
 			}
 		}
